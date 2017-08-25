@@ -1,28 +1,28 @@
 module Main exposing (..)
 
-import Html
-import Html.Attributes
+import Html exposing (button, div, h1, input, label, li, section, text, ul)
+import Html.Attributes exposing (id, type_)
 
 
 main =
-    Html.div []
-        [ Html.h1 [] [ Html.text "Tada List" ]
-        , Html.section []
-            [ Html.input [ Html.Attributes.id "newTask" ] []
-            , Html.button [] [ Html.text "Add" ]
+    div []
+        [ h1 [] [ text "Tada List" ]
+        , section []
+            [ input [ id "newTask" ] []
+            , button [] [ text "Add" ]
             ]
-        , Html.section []
-            [ Html.ul []
-                [ Html.li []
-                    [ Html.label []
-                        [ Html.input [ Html.Attributes.type_ "checkbox" ] []
-                        , Html.text "Buy some milk"
+        , section []
+            [ ul []
+                [ li []
+                    [ label []
+                        [ input [ type_ "checkbox" ] []
+                        , text "Buy some milk"
                         ]
                     ]
-                , Html.li []
-                    [ Html.label []
-                        [ Html.input [ Html.Attributes.type_ "checkbox" ] []
-                        , Html.text "Buy some coffee"
+                , li []
+                    [ label []
+                        [ input [ type_ "checkbox" ] []
+                        , text "Buy some coffee"
                         ]
                     ]
                 ]
