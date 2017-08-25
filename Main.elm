@@ -9,34 +9,34 @@ main =
 
 
 model =
-    { newTask = "", taskList = [] }
+    { newTask = "", taskList = [ "Buy some milk", "Buy some coffee" ] }
 
 
 update msg model =
-    { newTask = "", taskList = [] }
+    { newTask = "", taskList = [ "Buy some milk", "Buy some coffee" ] }
 
 
 view model =
     div []
         [ h1 [] [ text "Tada List" ]
         , section []
-            [ input [ id "newTask" ] []
+            [ input [ id "newTask" ] [ text model.newTask ]
             , button [] [ text "Add" ]
             ]
         , section []
-            [ ul []
-                [ li []
-                    [ label []
-                        [ input [ type_ "checkbox" ] []
-                        , text "Buy some milk"
-                        ]
-                    ]
-                , li []
-                    [ label []
-                        [ input [ type_ "checkbox" ] []
-                        , text "Buy some coffee"
-                        ]
-                    ]
-                ]
+            [ ul [] (displayList model.taskList)
+            ]
+        ]
+
+
+displayList list =
+    List.map displayItem list
+
+
+displayItem item =
+    li []
+        [ label []
+            [ input [ type_ "checkbox" ] []
+            , text item
             ]
         ]
