@@ -9,11 +9,11 @@ main =
 
 
 model =
-    0
+    { newTask = "", taskList = [] }
 
 
-update msg number =
-    0
+update msg model =
+    { newTask = "", taskList = [] }
 
 
 view model =
