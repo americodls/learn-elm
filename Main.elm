@@ -5,6 +5,18 @@ import Html.Attributes exposing (id, type_)
 
 
 main =
+    Html.beginnerProgram { model = model, update = update, view = view }
+
+
+model =
+    0
+
+
+update msg number =
+    0
+
+
+view model =
     div []
         [ h1 [] [ text "Tada List" ]
         , section []
