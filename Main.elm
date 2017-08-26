@@ -10,7 +10,7 @@ main =
 
 
 model =
-    { newTask = "", taskList = [ "Buy some milk", "Buy some coffee" ] }
+    Model "" []
 
 
 view model =
@@ -45,7 +45,13 @@ update action model =
             { model | newTask = newTask }
 
         UpdateTaskList ->
-            { taskList = (model.newTask :: model.taskList), newTask = "" }
+            Model "" (model.newTask :: model.taskList)
+
+
+type alias Model =
+    { newTask : String
+    , taskList : List String
+    }
 
 
 type Action newTask
