@@ -1,7 +1,8 @@
 module Main exposing (..)
 
 import Html exposing (button, div, h1, input, label, li, section, text, ul)
-import Html.Attributes exposing (id, type_)
+import Html.Attributes exposing (id, type_, value)
+import Html.Events exposing (onInput, onClick)
 
 
 main =
@@ -12,16 +13,12 @@ model =
     { newTask = "", taskList = [ "Buy some milk", "Buy some coffee" ] }
 
 
-update msg model =
-    { newTask = "", taskList = [ "Buy some milk", "Buy some coffee" ] }
-
-
 view model =
     div []
         [ h1 [] [ text "Tada List" ]
         , section []
-            [ input [ id "newTask" ] [ text model.newTask ]
-            , button [] [ text "Add" ]
+            [ input [ id "newTask", onInput UpdateNewTask, value model.newTask ] []
+            , button [ onClick UpdateTaskList ] [ text "Add" ]
             ]
         , section []
             [ ul [] (displayList model.taskList)
@@ -40,3 +37,17 @@ displayItem item =
             , text item
             ]
         ]
+
+
+update action model =
+    case action of
+        UpdateNewTask newTask ->
+            { model | newTask = newTask }
+
+        UpdateTaskList ->
+            { taskList = (model.newTask :: model.taskList), newTask = "" }
+
+
+type Action newTask
+    = UpdateNewTask newTask
+    | UpdateTaskList
