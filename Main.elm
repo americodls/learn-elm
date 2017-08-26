@@ -6,37 +6,51 @@ import Html.Events exposing (onInput, onClick)
 
 
 main =
-    Html.beginnerProgram { model = model, update = update, view = view }
+    Html.beginnerProgram { view = view, model = model, update = update }
 
 
-model =
-    Model "" []
+
+-- VIEW
 
 
 view model =
     div []
         [ h1 [] [ text "Tada List" ]
         , section []
-            [ input [ id "newTask", onInput UpdateNewTask, value model.newTask ] []
+            [ input [ onInput UpdateNewTask, value model.newTask ] []
             , button [ onClick UpdateTaskList ] [ text "Add" ]
             ]
         , section []
-            [ ul [] (displayList model.taskList)
+            [ ul [] (List.map toListItemView model.taskList)
             ]
         ]
 
 
-displayList list =
-    List.map displayItem list
-
-
-displayItem item =
+toListItemView item =
     li []
         [ label []
             [ input [ type_ "checkbox" ] []
             , text item
             ]
         ]
+
+
+
+-- MODEL
+
+
+type alias Model =
+    { newTask : String
+    , taskList : List String
+    }
+
+
+model =
+    Model "" []
+
+
+
+-- UPDATE
 
 
 update action model =
@@ -46,12 +60,6 @@ update action model =
 
         UpdateTaskList ->
             Model "" (model.newTask :: model.taskList)
-
-
-type alias Model =
-    { newTask : String
-    , taskList : List String
-    }
 
 
 type Action newTask
